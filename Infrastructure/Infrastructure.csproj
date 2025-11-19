@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Persistence\EntityConfigurations\Categories\**" />
+    <Compile Remove="Repositories\Business\**" />
+    <EmbeddedResource Remove="Persistence\EntityConfigurations\Categories\**" />
+    <EmbeddedResource Remove="Repositories\Business\**" />
+    <None Remove="Persistence\EntityConfigurations\Categories\**" />
+    <None Remove="Repositories\Business\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Persistence\EntityConfigurations\AcademicAreaConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\AcademicEssentialKnowledgeConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\AcademicMetodologyConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\AcademicObjectiveConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\AcademicPerformanceConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\AcademicPeriodConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\AcademicUnitConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusAcademicAreaConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusAcademicAreaReviewerConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusAcademicPeriodConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusCourseConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusGradeConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusLanguageConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusSubjectConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CampusSubjectTeacherConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CompetenceConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CourseConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CycleKnowledgeConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CycleObjectiveConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\CycleReviewConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\GradeConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\LanguageConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\MainCurriculumFrameworkConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\MainCurriculumFrameworkFileConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\ParentConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\ParentStudentConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningAttachmentConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningCloneLogConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningCompetenceConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningCycleConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningCyclePerformanceConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningMethodologyConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningPerformanceConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\PlanningUnitConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\ProcessFormConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\ProcessFormDataConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\ProcessFormReviewConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\RoleConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\SettingConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\StudentConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\StudentEnrollmentConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\SubjectConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\TeacherCampusConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\TeacherConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\TeachingAssignmentConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\UserConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\UserRoleConfiguration.cs" />
+    <Compile Remove="Persistence\EntityConfigurations\UserTypeMapConfiguration.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Shared\Shared\Shared.csproj" />
+  </ItemGroup>
+
+</Project>

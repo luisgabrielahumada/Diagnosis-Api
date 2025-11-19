@@ -1,0 +1,142 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DTOs\AcademicArea\**" />
+    <Compile Remove="DTOs\AccessProvider\**" />
+    <Compile Remove="DTOs\Campus\**" />
+    <Compile Remove="DTOs\DataList\**" />
+    <Compile Remove="DTOs\Form\**" />
+    <Compile Remove="DTOs\Matrix\**" />
+    <Compile Remove="DTOs\Mcc\**" />
+    <Compile Remove="DTOs\Planning\**" />
+    <Compile Remove="DTOs\ProcessFile\**" />
+    <Compile Remove="Services\Curriculum\**" />
+    <Compile Remove="Services\Setting\**" />
+    <Compile Remove="Services\WebHookNotificacion\**" />
+    <EmbeddedResource Remove="DTOs\AcademicArea\**" />
+    <EmbeddedResource Remove="DTOs\AccessProvider\**" />
+    <EmbeddedResource Remove="DTOs\Campus\**" />
+    <EmbeddedResource Remove="DTOs\DataList\**" />
+    <EmbeddedResource Remove="DTOs\Form\**" />
+    <EmbeddedResource Remove="DTOs\Matrix\**" />
+    <EmbeddedResource Remove="DTOs\Mcc\**" />
+    <EmbeddedResource Remove="DTOs\Planning\**" />
+    <EmbeddedResource Remove="DTOs\ProcessFile\**" />
+    <EmbeddedResource Remove="Services\Curriculum\**" />
+    <EmbeddedResource Remove="Services\Setting\**" />
+    <EmbeddedResource Remove="Services\WebHookNotificacion\**" />
+    <None Remove="DTOs\AcademicArea\**" />
+    <None Remove="DTOs\AccessProvider\**" />
+    <None Remove="DTOs\Campus\**" />
+    <None Remove="DTOs\DataList\**" />
+    <None Remove="DTOs\Form\**" />
+    <None Remove="DTOs\Matrix\**" />
+    <None Remove="DTOs\Mcc\**" />
+    <None Remove="DTOs\Planning\**" />
+    <None Remove="DTOs\ProcessFile\**" />
+    <None Remove="Services\Curriculum\**" />
+    <None Remove="Services\Setting\**" />
+    <None Remove="Services\WebHookNotificacion\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="DTOs\AcademicEssentialKnowledgeDto.cs" />
+    <Compile Remove="DTOs\AcademicMetodologyDto.cs" />
+    <Compile Remove="DTOs\AcademicObjectiveDto.cs" />
+    <Compile Remove="DTOs\AcademicPerformanceDto.cs" />
+    <Compile Remove="DTOs\AcademicPeriodDto.cs" />
+    <Compile Remove="DTOs\AcademicUnitDto.cs" />
+    <Compile Remove="DTOs\AuditLogDto.cs" />
+    <Compile Remove="DTOs\CampusDto.cs" />
+    <Compile Remove="DTOs\CampusRoleDto.cs" />
+    <Compile Remove="DTOs\CompetenceDto.cs" />
+    <Compile Remove="DTOs\ConfigurationDto.cs" />
+    <Compile Remove="DTOs\CourseDto.cs" />
+    <Compile Remove="DTOs\CycleKnowledgeDto.cs" />
+    <Compile Remove="DTOs\CycleObjectiveDto.cs" />
+    <Compile Remove="DTOs\CycleReviewDto.cs" />
+    <Compile Remove="DTOs\GradeDto.cs" />
+    <Compile Remove="DTOs\LanguageDto.cs" />
+    <Compile Remove="DTOs\LoginDto.cs" />
+    <Compile Remove="DTOs\LoginResponseDto.cs" />
+    <Compile Remove="DTOs\LookupBundleDto.cs" />
+    <Compile Remove="DTOs\MainCurriculumFrameworkDto.cs" />
+    <Compile Remove="DTOs\PlanningAttachmentDto.cs" />
+    <Compile Remove="DTOs\PlanningCloneLogDto.cs" />
+    <Compile Remove="DTOs\PlanningCompetenceDto.cs" />
+    <Compile Remove="DTOs\PlanningCycleDto.cs" />
+    <Compile Remove="DTOs\PlanningDto.cs" />
+    <Compile Remove="DTOs\PlanningMethodologyDto.cs" />
+    <Compile Remove="DTOs\PlanningPerformanceDto.cs" />
+    <Compile Remove="DTOs\PlanningUnitDto.cs" />
+    <Compile Remove="DTOs\RoleDto.cs" />
+    <Compile Remove="DTOs\RolePermissionDto.cs" />
+    <Compile Remove="DTOs\SessionDto.cs" />
+    <Compile Remove="DTOs\SubjectDto.cs" />
+    <Compile Remove="DTOs\UserDto.cs" />
+    <Compile Remove="DTOs\UserLoggindDto.cs" />
+    <Compile Remove="Services\AcademicAreaService.cs" />
+    <Compile Remove="Services\AcademicEssentialKnowledgeService.cs" />
+    <Compile Remove="Services\AcademicMethodologyService.cs" />
+    <Compile Remove="Services\AcademicObjectiveService.cs" />
+    <Compile Remove="Services\AcademicPerformanceService.cs" />
+    <Compile Remove="Services\AcademicPeriodService.cs" />
+    <Compile Remove="Services\AcademicUnitService.cs" />
+    <Compile Remove="Services\AuditLogService.cs" />
+    <Compile Remove="Services\AuthService.cs" />
+    <Compile Remove="Services\CampusService.cs" />
+    <Compile Remove="Services\CompetencyService.cs" />
+    <Compile Remove="Services\CourseService.cs" />
+    <Compile Remove="Services\CurriculumFrameworkService.cs" />
+    <Compile Remove="Services\CycleKnowledgeService.cs" />
+    <Compile Remove="Services\CycleObjectiveService.cs" />
+    <Compile Remove="Services\CycleReviewsService.cs" />
+    <Compile Remove="Services\DashboardService.cs" />
+    <Compile Remove="Services\EnumService.cs" />
+    <Compile Remove="Services\GradeService.cs" />
+    <Compile Remove="Services\LanguageService.cs" />
+    <Compile Remove="Services\LookupService.cs" />
+    <Compile Remove="Services\PlanningCompetencieService.cs" />
+    <Compile Remove="Services\PlanningCycleService.cs" />
+    <Compile Remove="Services\PlanningMethodologyService.cs" />
+    <Compile Remove="Services\PlanningPerformacenService.cs" />
+    <Compile Remove="Services\PlanningService.cs" />
+    <Compile Remove="Services\PlanningUnitsService.cs" />
+    <Compile Remove="Services\RoleService.cs" />
+    <Compile Remove="Services\SessionService.cs" />
+    <Compile Remove="Services\SubjectsService.cs" />
+    <Compile Remove="Services\TeacherService.cs" />
+    <Compile Remove="Services\UserService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="Cronos" Version="0.11.1" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.3.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.20" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Connections" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.12.1" />
+    <PackageReference Include="NCrontab" Version="3.3.3" />
+    <PackageReference Include="Scrutor" Version="6.1.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.31" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Shared\Shared\Shared.csproj" />
+  </ItemGroup>
+
+</Project>

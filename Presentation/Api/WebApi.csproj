@@ -1,0 +1,96 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Content\wwwroot\**" />
+	  <Compile Remove="Controllers\Configuration\**" />
+	  <Compile Remove="Controllers\WebHook\**" />
+	  <Compile Remove="wwwroot\**" />
+	  <Content Remove="Content\wwwroot\**" />
+	  <Content Remove="Controllers\Configuration\**" />
+	  <Content Remove="Controllers\WebHook\**" />
+	  <Content Remove="wwwroot\**" />
+	  <EmbeddedResource Remove="Content\wwwroot\**" />
+	  <EmbeddedResource Remove="Controllers\Configuration\**" />
+	  <EmbeddedResource Remove="Controllers\WebHook\**" />
+	  <EmbeddedResource Remove="wwwroot\**" />
+	  <None Remove="Content\wwwroot\**" />
+	  <None Remove="Controllers\Configuration\**" />
+	  <None Remove="Controllers\WebHook\**" />
+	  <None Remove="wwwroot\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Controllers\AreaController.cs" />
+	  <Compile Remove="Controllers\AuditLogController.cs" />
+	  <Compile Remove="Controllers\AuthController.cs" />
+	  <Compile Remove="Controllers\CampusesController.cs" />
+	  <Compile Remove="Controllers\CompetencyController.cs" />
+	  <Compile Remove="Controllers\CurriculumController.cs" />
+	  <Compile Remove="Controllers\DashboardController.cs" />
+	  <Compile Remove="Controllers\GradeController.cs" />
+	  <Compile Remove="Controllers\LogController.cs" />
+	  <Compile Remove="Controllers\LookupsController.cs" />
+	  <Compile Remove="Controllers\PeriodController.cs" />
+	  <Compile Remove="Controllers\PlanningController.cs" />
+	  <Compile Remove="Controllers\RoleController.cs" />
+	  <Compile Remove="Controllers\SessionController.cs" />
+	  <Compile Remove="Controllers\SettingController.cs" />
+	  <Compile Remove="Controllers\SubjectsController.cs" />
+	  <Compile Remove="Controllers\TestNotificationController.cs" />
+	  <Compile Remove="Controllers\UserController.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_WebToolingArtifacts Remove="Properties\launchSettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Properties\launchSettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AspNetCoreRateLimit" Version="5.0.0" />
+		<PackageReference Include="Hangfire.AspNetCore" Version="1.8.20" />
+		<PackageReference Include="Hangfire.Core" Version="1.8.20" />
+		<PackageReference Include="Hangfire.InMemory" Version="1.0.0" />
+		<PackageReference Include="Hangfire.Redis.StackExchange" Version="1.12.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+		<PackageReference Include="Serilog" Version="4.2.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="Smart.Traceking" Version="8.1.6" />
+		<PackageReference Include="StackExchange.Redis" Version="2.8.31" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="appsettings.Staging.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Application\Application.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+		<ProjectReference Include="..\..\Shared\Shared\Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Attribute\" />
+	  <Folder Include="Content\" />
+	  <Folder Include="Middleware\" />
+	</ItemGroup>
+
+</Project>
