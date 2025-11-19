@@ -13,77 +13,167 @@
 
 </div>
 
+---
+
 ## 🧠 Description
 
 **TestZombis-API** is a backend system built in **.NET 8** designed to analyze NxN genetic matrices and determine infection types such as **Zombie**, **Covid**, **Influenza**, and more.
 
-The API implements:
+This API demonstrates enterprise‑level backend design principles using:
 
 - **Factory Pattern**
 - **Strategy Pattern**
 - **Clean Architecture**
+- **EF Core without migrations** (manual SQL schema)
 
-> ❗ This API does **NOT** use EF migrations. Database must be built using SQL script.
+> ❗ *The database must be created using SQL scripts included in the repository.*
 
-## 🏗 Architecture
+---
+
+## 🧬 Features
+
+- Detection of genetic infection patterns (horizontal, vertical, diagonal).
+- Multiple diagnosis types handled through strategies.
+- SQL Server database built via SQL scripts.
+- Statistics endpoint (`/api/stats`).
+- Swagger enabled (⚠️ **no authentication yet**).
+- 100 test patients + sample Zombie matrix preloaded.
+
+---
+
+## 🏗 System Architecture
 
 ```
-┌───────────────────────┐
-│       Web API          │
-└─────────────┬─────────┘
-              ▼
-┌───────────────────────┐
-│      Application       │
-└─────────────┬─────────┘
-              ▼
-┌───────────────────────┐
-│       Domain           │
-└─────────────┬─────────┘
-              ▼
-┌───────────────────────┐
-│    Infrastructure      │
-└───────────────────────┘
+/Domain
+   /Entities
+/Application
+   /DTOs
+   /Diagnosis
+       /Factory
+       /Strategies
+       /Services
+/Infrastructure
+   /Persistence
+       ApplicationDbContext.cs
+       /EntityConfigurations
+/WebApi
+   /Controllers
 ```
 
-## 🔁 Sequence Diagram
+---
+
+## 🔁 Sequence Diagram – Diagnosis Workflow
 
 ```mermaid
 sequenceDiagram
-Client->>Controller: POST /diagnosis/{type}
-Controller->>DiagnosisService: CreateDiagnosisAsync
-DiagnosisService->>DiagnosisFactory: GetStrategy
-DiagnosisFactory->>Strategy: Resolve
-Strategy-->>DiagnosisService: Result
-DiagnosisService->>DbContext: Save
-DbContext-->>DiagnosisService: OK
-DiagnosisService-->>Controller: Response
-Controller-->>Client: 200 OK
+    autonumber
+
+    participant Client
+    participant Controller
+    participant DiagnosisService
+    participant DiagnosisFactory
+    participant Strategy
+    participant DbContext
+
+    Client->>Controller: POST /api/diagnosis/{type}
+    Controller->>DiagnosisService: CreateDiagnosisAsync()
+    DiagnosisService->>DiagnosisFactory: GetStrategy(type)
+    DiagnosisFactory-->>DiagnosisService: Strategy Instance
+    DiagnosisService->>Strategy: ExecuteAsync(dto)
+    Strategy-->>DiagnosisService: DiagnosisResult
+    DiagnosisService->>DbContext: Save diagnosis + matrix
+    DbContext-->>DiagnosisService: OK
+    DiagnosisService-->>Controller: ResponseDto
+    Controller-->>Client: 200 OK
 ```
 
-## 🧩 Strategy Diagram
+---
+
+## 🧩 Strategy Pattern Diagram
 
 ```mermaid
 classDiagram
-IDiagnosisStrategy <|.. ZombieDiagnosisStrategy
-IDiagnosisStrategy <|.. CovidDiagnosisStrategy
-IDiagnosisStrategy <|.. InfluenzaDiagnosisStrategy
+    class IDiagnosisStrategy {
+        +string TypeName
+        +ExecuteAsync(dto) Diagnosis
+    }
+
+    class ZombieDiagnosisStrategy {
+        +ExecuteAsync(dto)
+    }
+
+    class CovidDiagnosisStrategy {
+        +ExecuteAsync(dto)
+    }
+
+    class InfluenzaDiagnosisStrategy {
+        +ExecuteAsync(dto)
+    }
+
+    IDiagnosisStrategy <|.. ZombieDiagnosisStrategy
+    IDiagnosisStrategy <|.. CovidDiagnosisStrategy
+    IDiagnosisStrategy <|.. InfluenzaDiagnosisStrategy
 ```
 
-## 🚀 Run
+---
 
-```
+## 🧬 Database (No EF Migrations)
+
+The API uses EF Core only as an ORM.  
+All tables are created manually:
+
+- `Patient`
+- `Diagnosis`
+- `DnaMatrix`
+
+Provided scripts include:
+
+- 100 generated patients
+- Example 6×6 Zombie infection matrix
+
+---
+
+## 🚀 How to Run
+
+### 1. Clone the repository
+```bash
 git clone https://github.com/luisgabrielahumada/TestZombis-Api.git
+```
+
+### 2. Configure SQL Server connection
+Edit:
+
+```
+appsettings.json
+Shared/Configuration/DbConfiguration.cs
+```
+
+### 3. Run SQL scripts
+Create tables + seed data.
+
+### 4. Run the API
+```bash
 dotnet run
 ```
 
-## 📡 Endpoint
+### 5. Open Swagger
+```
+http://localhost:{port}/swagger
+```
+
+> ⚠ *Swagger currently has **no authentication**. In production, secure it with API Keys, JWT, OAuth2 or IP restrictions.*
+
+---
+
+## 📡 Main Endpoints
+
+### 1️⃣ Create Diagnosis
 
 ```
 POST /api/diagnosis/{diagnosisType}
 ```
 
-### Example
-
+#### Example Body
 ```json
 {
   "patientFullName": "John Connor",
@@ -100,4 +190,56 @@ POST /api/diagnosis/{diagnosisType}
   ]
 }
 ```
+
+---
+
+### 2️⃣ Statistics Endpoint
+
+```
+GET /api/stats
+```
+
+#### Example Response
+```json
+{
+  "totalPatients": 100,
+  "totalDiagnosis": 45,
+  "zombieCount": 10,
+  "humanCount": 35,
+  "zombieRatio": 0.22
+}
+```
+
+---
+
+## 📊 Swagger Usage
+
+Swagger exposes all endpoints, including:
+
+- `POST /api/diagnosis/{diagnosisType}`
+- `GET /api/stats`
+
+Because the API is for testing and learning, Swagger currently has **no security**.
+
+To secure later:
+- Basic Auth  
+- API Key  
+- JWT Bearer  
+- OAuth2  
+- Restrict to local/development  
+
+---
+
+## 🛡 Project Status
+
+- ✔ Fully functional  
+- ✔ Clean and maintainable  
+- ✔ Built for interviews & technical demos  
+- ✔ Extensible: add new diagnosis strategies easily  
+
+---
+
+## 📜 License
+
+Demo & educational project showcasing backend architecture and design patterns.
 
