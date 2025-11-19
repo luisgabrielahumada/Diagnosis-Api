@@ -176,9 +176,9 @@ POST /api/diagnosis/{diagnosisType}
 #### Example Body
 ```json
 {
-  "patientFullName": "John Connor",
-  "patientDocumentNumber": "DOC55555",
-  "patientGender": "Male",
+  "fullName": "Test Patient 59",
+  "patientId": "52BFF1AA-CA68-49A9-AA20-000B8050B581",
+  "documentNumber": "DOC00059",
   "diagnosisType": "zombie",
   "geneticCode": [
     "PLAGGP",
