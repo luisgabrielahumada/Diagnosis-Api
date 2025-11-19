@@ -170,7 +170,7 @@ http://localhost:{port}/swagger
 ### 1️⃣ Create Diagnosis
 
 ```
-POST /api/diagnosis/{diagnosisType}
+POST /api/diagnosis/{diagnosisType} diagnosisType:zombie|covid|ebola|etc
 ```
 
 #### Example Body
@@ -179,7 +179,6 @@ POST /api/diagnosis/{diagnosisType}
   "fullName": "Test Patient 59",
   "patientId": "52BFF1AA-CA68-49A9-AA20-000B8050B581",
   "documentNumber": "DOC00059",
-  "diagnosisType": "zombie",
   "geneticCode": [
     "PLAGGP",
     "APGLGP",
