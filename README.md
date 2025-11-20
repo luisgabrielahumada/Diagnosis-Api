@@ -189,7 +189,7 @@ https://diagnosis-api-dev.azurewebsites.net/swagger
 ### 1️⃣ Create Diagnosis
 
 ```
-POST /api/diagnosis/{diagnosisType} diagnosisType:zombie|covid|ebola|etc
+POST /api/Diagnosis/analyze/{diagnosisType} diagnosisType:zombie|covid|ebola|etc
 ```
 
 #### Example Body
