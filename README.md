@@ -174,7 +174,10 @@ dotnet run
 
 ### 5. Open Swagger
 ```
+Env:Local
 http://localhost:{port}/swagger
+Env:Dev-Azure
+https://diagnosis-api-dev.azurewebsites.net/swagger
 ```
 
 > ⚠ *Swagger currently has **no authentication**. In production, secure it with API Keys, JWT, OAuth2 or IP restrictions.*
