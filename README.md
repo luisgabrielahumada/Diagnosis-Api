@@ -143,8 +143,25 @@ git clone https://github.com/luisgabrielahumada/TestZombis-Api.git
 Edit:
 
 ```
-appsettings.json
-Shared/Configuration/DbConfiguration.cs
+Env:Local
+   appsettings.json
+   "ConnectionStrings": {
+     "DefaultConnection": "<ConnectionsString>"
+   }
+   appsettings.Development.json
+   "ConnectionStrings": {
+     "DefaultConnection": "<ConnectionsString>"
+   }
+Env:Staging
+   appsettings.Staging.json
+   "ConnectionStrings": {
+     "DefaultConnection": "<ConnectionsString>"
+   }
+Env:Production
+   appsettings.Production.json
+   "ConnectionStrings": {
+     "DefaultConnection": "<ConnectionsString>"
+   }
 ```
 
 ### 3. Run SQL scripts
