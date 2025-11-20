@@ -214,7 +214,7 @@ POST /api/diagnosis/{diagnosisType} diagnosisType:zombie|covid|ebola|etc
 ### 2️⃣ Statistics Endpoint
 
 ```
-GET /api/stats
+GET /api/diagnosis/stats?diagnosisType=zombie|covid|ebola|etc
 ```
 
 #### Example Response
@@ -234,7 +234,7 @@ GET /api/stats
 Swagger exposes all endpoints, including:
 
 - `POST /api/diagnosis/{diagnosisType}`
-- `GET /api/stats`
+- `GET /api/diagnosis/stats`
 
 Because the API is for testing and learning, Swagger currently has **no security**.
 
