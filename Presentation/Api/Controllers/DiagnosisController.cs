@@ -29,8 +29,7 @@ namespace Web.Api.Controllers
         {
 
             var result = await _process.CreateDiagnosisAsync(diagnosisType, patient);
-
-            return Response(new ApiResponse<PatientDiagnosisResponseDto>(result), onError: result.Data.Infected);
+            return Response(new ApiResponse<PatientDiagnosisResponseDto>(result), onError: !result.Data.Infected);
         }
 
         [HttpGet("stats")]

@@ -4,8 +4,7 @@ namespace Application.DTOs
 {
     public class PatientDto
     {
-        [Required]
-        public Guid PatientId { get; set; }
+        public Guid? PatientId { get; set; } = Guid.Empty;
         public string? FullName { get; set; }
         public string? DocumentNumber { get; set; }
     }

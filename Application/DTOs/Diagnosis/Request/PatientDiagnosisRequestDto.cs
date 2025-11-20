@@ -5,7 +5,6 @@ namespace Application.Dtos
 {
     public class PatientDiagnosisRequestDto: PatientDto
     {
-        [Required]
-        public List<string> GeneticCode { get; set; } = new();
+        public List<string> GeneticCode { get; set; }
     }
 }

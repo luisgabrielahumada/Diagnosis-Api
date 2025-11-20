@@ -2,7 +2,8 @@
 using Application.Strategies.Helper;
 using Application.Strategies.Interface;
 using Domain.Entities;
-using Infrastructure.Interfaces;
+using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication;
 using Newtonsoft.Json;
 using Shared;
 using Shared.Response;
@@ -13,12 +14,12 @@ namespace Application.Strategies
     public class ZombieDiagnosisStrategy : IDiagnosisStrategy
     {
         public string TypeName => Constants.DiagnosisType.Zombie;
-        private readonly IReadRepository<Patient> _readPatient;
-        private readonly IWriteRepository<Diagnosis> _writeDiagnosis;
-        public ZombieDiagnosisStrategy(IReadRepository<Patient> readPatient, IWriteRepository<Diagnosis> writeDiagnosis)
+        private readonly IPatientRepository _patient;
+        private readonly IDiagnosisRepository _diagnosis;
+        public ZombieDiagnosisStrategy(IPatientRepository patient, IDiagnosisRepository diagnosis)
         {
-            _readPatient = readPatient;
-            _writeDiagnosis = writeDiagnosis;
+            _patient = patient;
+            _diagnosis = diagnosis;
         }
 
         public async Task<ServiceResponse<PatientDiagnosisResponseDto>> ExecuteAsync(PatientDiagnosisRequestDto input)
@@ -27,10 +28,16 @@ namespace Application.Strategies
 
             try
             {
-                var patientData = await _readPatient.GetByIdAsync(input.PatientId);
+                var patientData = await _patient.GetByIdAsync(input.PatientId.Value);
                 if (!patientData.Status)
                 {
                     response.AddErrors(patientData.Errors);
+                    return response;
+                }
+
+                if(patientData.Data is not Patient)
+                {
+                    response.AddError("Paciente no encontrado.");
                     return response;
                 }
 
@@ -50,7 +57,7 @@ namespace Application.Strategies
 
                 var diagnosisRecord = new Diagnosis
                 {
-                    PatientId = input.PatientId,
+                    PatientId = input.PatientId.Value,
                     DiagnosisType = TypeName,
                     IsInfected = isZombie,
                     CreatedAt = DateTime.UtcNow,
@@ -59,7 +66,7 @@ namespace Application.Strategies
                     Id = Guid.NewGuid(),
                 };
 
-                await _writeDiagnosis.AddAsync(diagnosisRecord);
+                await _diagnosis.AddAsync(diagnosisRecord);
 
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-namespace Infrastructure.Interfaces
+namespace Infrastructure.Repositories
 {
     public interface IWriteRepository<T> where T : class
     {

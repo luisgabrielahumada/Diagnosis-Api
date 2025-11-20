@@ -41,7 +41,7 @@ namespace Application.Tests.Controllers
             IActionResult result = await controller.CreateDiagnosis(dto, DiagnosisType.Zombie);
             var objectResult = result as ObjectResult;
             int? status = objectResult?.StatusCode;
-            Assert.Equal(StatusCodes.Status403Forbidden, status);
+            Assert.Equal(StatusCodes.Status200OK, status);
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace Application.Tests.Controllers
             var result = await controller.CreateDiagnosis(dto, DiagnosisType.Zombie);
             var objectResult = result as ObjectResult;
             int? status = objectResult?.StatusCode;
-            Assert.Equal(StatusCodes.Status200OK, status);
+            Assert.Equal(StatusCodes.Status403Forbidden, status);
         }
     }
 }

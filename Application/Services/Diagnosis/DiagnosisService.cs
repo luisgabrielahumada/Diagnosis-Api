@@ -2,7 +2,7 @@ using Application.Dtos;
 using Application.DTOs;
 using Application.Factory;
 using Domain.Entities;
-using Infrastructure.Interfaces;
+using Infrastructure.Repositories;
 using Shared.Response;
 namespace Application.Services
 {
@@ -15,20 +15,28 @@ namespace Application.Services
     public class DiagnosisService : IDiagnosisService
     {
         private readonly IDiagnosisFactory _factory;
-        private readonly IReadRepository<Diagnosis> _readDiagnosis;
-        public DiagnosisService(IDiagnosisFactory factory, IReadRepository<Diagnosis> readDiagnosis)
+        private readonly IDiagnosisRepository _diagnosis;
+        public DiagnosisService(IDiagnosisFactory factory, IDiagnosisRepository diagnosis)
         {
             _factory = factory;
-            _readDiagnosis = readDiagnosis;
+            _diagnosis = diagnosis;
         }
 
         public async Task<ServiceResponse<PatientDiagnosisResponseDto>> CreateDiagnosisAsync(string diagnosisType, PatientDiagnosisRequestDto patient)
         {
-            var sr = new ServiceResponse<PatientDiagnosisResponseDto>();
+            var sr = new ServiceResponse<PatientDiagnosisResponseDto>()
+            {
+                Data = new PatientDiagnosisResponseDto()
+                {
+                    Infected = false,
+                    Message = "No se pudo procesar el diagnóstico.",
+                    PatientId = patient.PatientId,
+                    DocumentNumber = patient.DocumentNumber,
+                    FullName = patient.FullName
+                }
+            };
             try
             {
-
-
 
                 var strategyResp = await _factory.GetStrategyAsync(diagnosisType);
                 if (!strategyResp.Status)
@@ -58,16 +66,14 @@ namespace Application.Services
             var sr = new ServiceResponse<StatsResponseDto>();
             try
             {
-                var diagnosisData = await _readDiagnosis.GetAllAsync(predicate: d => d.DiagnosisType == diagnosisType);
+                var diagnosisData = await _diagnosis.StatsCountAsync(diagnosisType);
                 if (!diagnosisData.Status)
                 {
                     sr.AddErrors(diagnosisData.Errors);
                     return sr;
                 }
 
-                var infected = diagnosisData.Data.Count(d => d.IsInfected);
-                var humans = diagnosisData.Data.Count(x => !x.IsInfected);
-
+                var (infected, humans) = diagnosisData.Data;
                 double ratio = humans == 0 ? 0 : (double)infected / humans;
 
                 sr.Data = new StatsResponseDto

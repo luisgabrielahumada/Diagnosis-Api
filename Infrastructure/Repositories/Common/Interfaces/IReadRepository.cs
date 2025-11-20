@@ -2,7 +2,7 @@ using Shared.Pagination;
 using Shared.Response;
 using System.Linq.Expressions;
 
-namespace Infrastructure.Interfaces
+namespace Infrastructure.Repositories
 {
     public interface IReadRepository<T> where T : class
     {
@@ -21,7 +21,7 @@ namespace Infrastructure.Interfaces
                           Expression<Func<T, TKey>> orderBy = null,
                           bool asNoTracking = true);
 
-        Task<ServiceResponse<T>> GetByIdAsync(Guid id,IEnumerable<string> includes = null,
+        Task<ServiceResponse<T>> GetByIdAsync(Guid id, IEnumerable<string> includes = null,
                                                             bool asNoTracking = true,
                                                             bool splitQuery = true);
 

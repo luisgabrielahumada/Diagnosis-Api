@@ -1,14 +1,12 @@
 ﻿using Application;
 using AspNetCoreRateLimit;
 using Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using Shared;
-using Shared.Configuration;
+using System.Text.Json;
 namespace Web.Api
 {
     public class Startup
@@ -50,7 +48,14 @@ namespace Web.Api
             services.AddMemoryCache();
             services.AddEndpointsApiExplorer();
             services.AddMvc();
-            services.AddControllers();
+            services.AddControllers()
+                      .AddJsonOptions(options =>
+                      {
+                          options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                          options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                          options.JsonSerializerOptions.DefaultIgnoreCondition =
+                              System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+                      });
             services.AddAuthorization();
             services.AddRazorPages();
             services.AddHttpClient();
