@@ -1,5 +1,6 @@
-using Application.Dtos.Request;
-using Application.Services.Diagnosis;
+using Application.Dtos;
+using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
@@ -20,12 +21,24 @@ namespace Web.Api.Controllers
             _process = process;
         }
 
-        [HttpPost("analyze/{diagnosisType}")]
+        [HttpPost("analyze/{diagnosisType=zombie}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ApiResponse<PatientDiagnosisResponseDto>), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> CreateDiagnosis([FromRoute] string diagnosisType, [FromBody] PatientDiagnosisRequestDto patient)
+        public async Task<IActionResult> CreateDiagnosis([FromBody] PatientDiagnosisRequestDto patient, [FromRoute] string diagnosisType = "zombie")
         {
-            return Response(new ApiResponse<PatientDiagnosisResponseDto>(await _process.CreateDiagnosisAsync(diagnosisType, patient)));
+
+            var result = await _process.CreateDiagnosisAsync(diagnosisType, patient);
+
+            return Response(new ApiResponse<PatientDiagnosisResponseDto>(result), onError: result.Data.Infected);
+        }
+
+        [HttpGet("stats")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<StatsResponseDto>), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Stats([FromQuery] string diagnosisType = "zombie")
+        {
+            return Response(new ApiResponse<StatsResponseDto>(await _process.StatsAsync(diagnosisType)));
         }
     }
 }

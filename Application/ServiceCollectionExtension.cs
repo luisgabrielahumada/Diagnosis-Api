@@ -1,5 +1,7 @@
 ﻿using Application.Factory;
+using Application.Services;
 using Application.Strategies;
+using Application.Strategies.Interface;
 using Microsoft.Extensions.DependencyInjection;
 namespace Application
 {
@@ -7,10 +9,11 @@ namespace Application
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IDiagnosisService, DiagnosisService>();
             services.AddScoped<IDiagnosisFactory, DiagnosisFactory>();
-            services.AddScoped<ZombieDiagnosisStrategy>();
-            services.AddScoped<CovidDiagnosisStrategy>();
-            services.AddScoped<InfluenzaDiagnosisStrategy>();
+            services.AddScoped<IDiagnosisStrategy,ZombieDiagnosisStrategy>();
+            services.AddScoped<IDiagnosisStrategy,CovidDiagnosisStrategy>();
+            services.AddScoped<IDiagnosisStrategy,InfluenzaDiagnosisStrategy>();
         }
     }
 }

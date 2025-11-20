@@ -1,6 +1,10 @@
-namespace Application.Dtos.Request
+using Application.DTOs;
+
+namespace Application.Dtos
 {
-    public class PatientDiagnosisResponseDto
+    public class PatientDiagnosisResponseDto : PatientDto
     {
+        public bool Infected { get; set; }
+        public string Message { get; set; }
     }
 }

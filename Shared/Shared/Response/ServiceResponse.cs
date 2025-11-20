@@ -16,7 +16,7 @@ namespace Shared.Response
 
         public bool AsyncOperation { get; set; }
 
-        public List<ServiceError> Errors { get; set; }
+        public List<ServiceError> Errors { get; set; } = new();
         public T Data { get; set; }
 
         public string MessageTitle { get; set; }

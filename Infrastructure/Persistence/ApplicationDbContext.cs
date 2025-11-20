@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Infrastructure.Persistence.Configuration;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 
@@ -30,7 +31,6 @@ namespace Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
             modelBuilder.ApplyConfiguration(new DiagnosisConfiguration());
-            modelBuilder.ApplyConfiguration(new DnaMatrixConfiguration());
         }
     }
 }

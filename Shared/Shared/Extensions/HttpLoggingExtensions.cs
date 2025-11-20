@@ -7,20 +7,16 @@ namespace Shared.Extensions
     {
         public static async Task<string> ConvertRequestToJsonAsync(this HttpRequest request)
         {
-            // Habilitar el buffering para permitir múltiples lecturas del cuerpo
             request.EnableBuffering();
 
-            // Leer el cuerpo de la solicitud
             string body;
             using (var reader = new StreamReader(request.Body, leaveOpen: true))
             {
                 body = await reader.ReadToEndAsync();
             }
 
-            // Reiniciar la posición del stream para que otros Middlewares puedan leerlo
             request.Body.Position = 0;
 
-            // Crear el objeto RequestLog
             var requestLog = new RequestLog
             {
                 Method = request.Method,
@@ -29,7 +25,6 @@ namespace Shared.Extensions
                 Body = body
             };
 
-            // Serializar a JSON
             return JsonSerializer.Serialize(requestLog, new JsonSerializerOptions { WriteIndented = true });
         }
 

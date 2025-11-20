@@ -6,15 +6,18 @@ namespace Web.Api.Code
 {
     public class BaseApiController : Controller
     {
-        protected new IActionResult Response(ApiResponse ar, bool notFoundOnError = false, bool returnAlways200 = false)
+        protected new IActionResult Response(ApiResponse ar, bool onError = false, bool returnAlways200 = false, int statusCode = StatusCodes.Status403Forbidden)
         {
             if (!ar.Status)
             {
-                if (notFoundOnError)
+                if (onError)
                     return NotFound();
 
                 return BadRequest(ar);
             }
+
+            if (onError)
+                return StatusCode(statusCode, ar);
 
             var content = ar;
             if (content == null)
@@ -22,10 +25,9 @@ namespace Web.Api.Code
 
             return Ok(content);
         }
-
-        protected new IActionResult Response<T>(ApiResponse<T> ar, bool notFoundOnError = false)
+        protected new IActionResult Response<T>(ApiResponse<T> ar, bool onError = false, bool returnAlways200 = false, int statusCode = StatusCodes.Status403Forbidden)
         {
-            return Response(ar.ToGeneric(), notFoundOnError);
+            return Response(ar.ToGeneric(), onError, returnAlways200, statusCode);
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {

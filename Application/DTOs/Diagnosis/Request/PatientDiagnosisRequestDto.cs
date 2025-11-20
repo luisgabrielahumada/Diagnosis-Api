@@ -1,11 +1,11 @@
-namespace Application.Dtos.Request
+using Application.DTOs;
+using System.ComponentModel.DataAnnotations;
+
+namespace Application.Dtos
 {
-    public class PatientDiagnosisRequestDto
+    public class PatientDiagnosisRequestDto: PatientDto
     {
-        public Guid? PatientId { get; set; }
-        public string? PatientFullName { get; set; }
-        public string? PatientDocumentNumber { get; set; }
-        public string? PatientGender { get; set; }
+        [Required]
         public List<string> GeneticCode { get; set; } = new();
     }
 }

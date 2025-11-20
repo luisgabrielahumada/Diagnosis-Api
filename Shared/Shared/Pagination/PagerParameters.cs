@@ -1,3 +1,5 @@
+using static Shared.Constants;
+
 namespace Shared.Pagination
 {
     public class PagerParameters
@@ -6,8 +8,8 @@ namespace Shared.Pagination
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
-            IsStatus = statusFilter == "active" ? true :
-                       statusFilter == "inactive" ? false : (bool?)null;
+            IsStatus = statusFilter == StatusFilter.Active ? true :
+                       statusFilter == StatusFilter.InActive ? false : (bool?)null;
         }
         public string Query { get; set; }
         public bool? IsStatus { set; get; }

@@ -240,18 +240,12 @@ namespace Shared.Extensions
         public static bool IsDirectoryEntry(this string normalized) =>
             normalized.EndsWith("/", StringComparison.Ordinal) || string.IsNullOrWhiteSpace(Path.GetFileName(normalized));
 
-        /// <summary>
-        /// If the path is "rootdir/whatever", returns "whatever". If there is no single
-        /// top-level folder, returns the original path.
-        /// </summary>
         public static string StripSingleTopFolder(this string normalized)
         {
             if (string.IsNullOrWhiteSpace(normalized)) return normalized;
             var parts = normalized.Split('/', StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length <= 1) return normalized;
 
-            // Detect if all entries share the same top-level folder is expensive here.
-            // Pragmatic approach: just drop the first segment.
             return string.Join('/', parts.Skip(1));
         }
     }

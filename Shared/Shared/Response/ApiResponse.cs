@@ -27,7 +27,20 @@ namespace Shared.Response
 
         public ApiResponse(ServiceResponse<T> sr)
         {
-            Errors = sr.Errors.Select(x => new ApiError(x)).ToList();
+            if (sr == null)
+            {
+                Errors = new List<ApiError>
+                {
+                    new ApiError( new ServiceError { ErrorCode = "500", ErrorDetail =  "Null ServiceResponse", ErrorMessage = "The service returned null." })
+                };
+                Data = default;
+                Code = HttpStatusCode.InternalServerError;
+                ReturnValue = default;
+                AsyncOperation = false;
+                return;
+            }
+
+            Errors = sr.Errors?.Select(x => new ApiError(x)).ToList() ?? new List<ApiError>();
             Data = sr.Data;
             Code = sr.Status ? HttpStatusCode.OK : HttpStatusCode.BadRequest;
             ReturnValue = sr.ReturnValue;

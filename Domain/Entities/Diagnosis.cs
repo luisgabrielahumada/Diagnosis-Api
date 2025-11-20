@@ -9,6 +9,6 @@
         public string GeneticCodeJson { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public Patient Patient { get; set; } = null!;
+        public bool IsInfected { get; set; } = false;
     }
-
 }

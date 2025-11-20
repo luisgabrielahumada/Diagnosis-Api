@@ -1,14 +1,15 @@
-﻿using Application.Dtos.Request;
+﻿using Application.Dtos;
 using Application.Strategies.Interface;
+using Shared;
 using Shared.Response;
 
 namespace Application.Strategies
 {
     public class InfluenzaDiagnosisStrategy : IDiagnosisStrategy
     {
-        public string TypeName => "influenza";
+        public string TypeName => Constants.DiagnosisType.Influenza;
 
-        public Task<ServiceResponse<PatientDiagnosisResponseDto>> ExecuteAsync(PatientDiagnosisRequestDto dto)
+        public Task<ServiceResponse<PatientDiagnosisResponseDto>> ExecuteAsync(PatientDiagnosisRequestDto input)
         {
             throw new NotImplementedException();
         }
