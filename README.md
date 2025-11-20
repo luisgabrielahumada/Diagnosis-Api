@@ -1,4 +1,4 @@
-# 🧬 TestZombis-API
+# 🧬 Diagnosis-Api
 
 <div align="center">
 
@@ -17,7 +17,7 @@
 
 ## 🧠 Description
 
-**TestZombis-API** is a backend system built in **.NET 8** designed to analyze NxN genetic matrices and determine infection types such as **Zombie**, **Covid**, **Influenza**, and more.
+**Diagnosis-Api** is a backend system built in **.NET 8** designed to analyze NxN genetic matrices and determine infection types such as **Zombie**, **Covid**, **Influenza**, and more.
 
 This API demonstrates enterprise‑level backend design principles using:
 
@@ -201,11 +201,10 @@ GET /api/stats
 #### Example Response
 ```json
 {
-  "totalPatients": 100,
-  "totalDiagnosis": 45,
-  "zombieCount": 10,
-  "humanCount": 35,
-  "zombieRatio": 0.22
+  "diagnosisType": zombie|covid|ebola|etc,
+  "countInfected": 10,
+  "countNotInfected": 35,
+  "ratio": 0.22
 }
 ```
 
