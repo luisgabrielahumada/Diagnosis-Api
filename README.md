@@ -124,7 +124,6 @@ All tables are created manually:
 
 - `Patient`
 - `Diagnosis`
-- `DnaMatrix`
 
 Provided scripts include:
 
