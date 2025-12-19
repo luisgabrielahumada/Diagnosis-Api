@@ -1,9 +1,14 @@
 using Application.Dtos;
 using Application.DTOs;
 using Application.Factory;
+using Azure;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Domain.Entities;
 using Infrastructure.Repositories;
+using Microsoft.Extensions.Caching.Memory;
+using Shared.CacheConfiguration;
 using Shared.Response;
+using static Shared.Constants;
 namespace Application.Services
 {
     public interface IDiagnosisService
@@ -16,10 +21,12 @@ namespace Application.Services
     {
         private readonly IDiagnosisFactory _factory;
         private readonly IDiagnosisRepository _diagnosis;
-        public DiagnosisService(IDiagnosisFactory factory, IDiagnosisRepository diagnosis)
+        private readonly IMemoryCache _cache;
+        public DiagnosisService(IDiagnosisFactory factory, IDiagnosisRepository diagnosis, IMemoryCache cache)
         {
             _factory = factory;
             _diagnosis = diagnosis;
+            _cache = cache;
         }
 
         public async Task<ServiceResponse<PatientDiagnosisResponseDto>> CreateDiagnosisAsync(string diagnosisType, PatientDiagnosisRequestDto patient)
@@ -66,6 +73,12 @@ namespace Application.Services
             var sr = new ServiceResponse<StatsResponseDto>();
             try
             {
+                if (_cache.TryGetValue(diagnosisType, out StatsResponseDto stastsResponse))
+                {
+                    sr.Data = stastsResponse;
+                    return sr;
+                }
+                
                 var diagnosisData = await _diagnosis.StatsCountAsync(diagnosisType);
                 if (!diagnosisData.Status)
                 {
@@ -84,6 +97,8 @@ namespace Application.Services
                     DiagnosisType = diagnosisType,
                     Ratio = ratio
                 };
+
+                _cache.Set(diagnosisType, sr.Data,TimeSpan.FromMinutes(20));
             }
             catch (Exception ex)
             {

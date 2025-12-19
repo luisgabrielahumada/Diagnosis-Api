@@ -27,6 +27,7 @@ namespace Infrastructure
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
             services.AddScoped<IDiagnosisRepository, DiagnosisRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IScheduledTaskRepository, ScheduledTaskRepository>();
 
 
         }

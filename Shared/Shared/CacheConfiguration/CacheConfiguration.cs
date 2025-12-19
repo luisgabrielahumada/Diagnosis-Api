@@ -5,7 +5,10 @@
         private static readonly Dictionary<string, T> _cache = new();
 
         public static void Set(string key, T value)
-            => _cache[key] = value;
+        {
+            _cache[key] = value;
+        }
+            
 
         public static void LoadAll<TKey>(IEnumerable<T> items,Func<T, TKey> keySelector)
         {

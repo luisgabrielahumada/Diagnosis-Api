@@ -27,5 +27,10 @@ namespace Shared
             public static readonly string InActive = "inactive";
             public static readonly string All = "all";
         }
+
+        public static class QueueType
+        {
+            public static readonly string[] Default = { "default", "critical", "slow" };
+        }
     }
 }

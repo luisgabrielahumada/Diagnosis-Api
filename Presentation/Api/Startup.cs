@@ -1,5 +1,8 @@
 ﻿using Application;
 using AspNetCoreRateLimit;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -7,6 +10,7 @@ using Serilog;
 using Serilog.Events;
 using Shared;
 using System.Text.Json;
+using static Shared.Constants;
 namespace Web.Api
 {
     public class Startup
@@ -68,6 +72,18 @@ namespace Web.Api
             services.AddAuthorization();
             services.AddInfrastructureServices();
             services.AddApplicationServices();
+
+            services.AddHangfire(config =>
+            {
+                config.UseMemoryStorage();
+            });
+            services.AddHangfireServer(options =>
+            {
+                options.WorkerCount = System.Environment.ProcessorCount; 
+                options.Queues =  QueueType.Default;
+            });
+
+
             Log.Logger = new LoggerConfiguration()
                             .MinimumLevel.Information()
                             .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
@@ -100,7 +116,7 @@ namespace Web.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Detección de Infección");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "");
                 c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
                 c.DefaultModelsExpandDepth(-1);
                 c.DisplayRequestDuration();
@@ -108,6 +124,12 @@ namespace Web.Api
                 c.ShowExtensions();
                 c.EnableDeepLinking();
             });
+
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                Authorization = null 
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

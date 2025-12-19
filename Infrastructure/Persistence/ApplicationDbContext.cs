@@ -1,7 +1,5 @@
 ﻿using Infrastructure.Persistence.Configuration;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Shared;
 
 namespace Infrastructure.Persistence
 {
@@ -13,8 +11,7 @@ namespace Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new PatientConfiguration());
-            modelBuilder.ApplyConfiguration(new DiagnosisConfiguration());
+            modelBuilder.ApplyConfiguration(new ScheduledTaskConfiguration());
         }
     }
 }

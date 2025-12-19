@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Shared.MapperModel;
+﻿using Shared.MapperModel;
 using Shared.Response;
 using System.Linq.Expressions;
-using System.Net.Http.Headers;
 using System.Reflection;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Shared.Extensions
 {
